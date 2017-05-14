@@ -1,0 +1,47 @@
+*{
+	box-sizing: border-box
+}
+
+.container{
+	width:600px;
+}
+.characters{
+	position:relative;
+	float:left;
+
+}
+.characterImgs{
+	width:150px;
+	height:150px;
+	padding:20px;
+	border:3px solid green;
+
+}
+
+.charName{
+	position:absolute;
+	top:5px;
+	left:0px;
+	right:0px;
+	text-align: center;
+
+}
+
+.charHps{
+	position:absolute;
+	bottom:10px;
+	left:0px;
+	right:0px;
+	text-align:center;
+}
+
+#chosenChar{
+	clear:both;
+}
+
+.active{
+	height:150px;
+	border:1px solid;
+	color:gray;
+}
+
