@@ -5,6 +5,8 @@
 .container{
 	width:600px;
 }
+
+/*character section*/
 .characters{
 	position:relative;
 	float:left;
@@ -35,6 +37,8 @@
 	text-align:center;
 }
 
+/*active section*/
+
 #chosenChar{
 	clear:both;
 }
@@ -45,3 +49,15 @@
 	color:gray;
 }
 
+#enemiesToAttack{
+	height:150px;
+	border:1px solid;
+}
+
+#enemies{
+	clear:both;
+}
+
+.fightSection{
+	clear:both;
+}
