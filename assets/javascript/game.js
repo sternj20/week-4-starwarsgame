@@ -37,12 +37,14 @@ var characters = $(".characters");
 var activeChars = $("#activeChars");
 var activeDefenders = $("#activeDefenders");
 var enemies = $("#enemiesToAttack");
+var isCharChosen = 'false';
 // -------------1----------------
 
 
 characters.on('click', function() {
-	//if the character you are clicking on is not already in the enemies section
-	if(!$.contains(enemies[0], this)){
+	//if the character you are clicking on is not already in the enemies or defender section
+	if(!$.contains(enemies[0], this) && isCharChosen === 'false'){
+
 		// it moves it down into the character section
 		enemies.append(characters);
 		// the remaining characters move down into enemies to attack
@@ -51,11 +53,17 @@ characters.on('click', function() {
 		for(var i = 0; i < enemies[0].children.length; i++){
 			enemies[0].children[i].style.background='red';
 		}
+		//change variable to true so this code won't get run with additional clicks
+		isCharChosen = 'true';
+	} else if ($.contains(enemies[0], this) && activeDefenders[0].children.length < 1){
+		// Click on an enemy to attack, it moves to the defender section
+		activeDefenders.append(this);
+		// Its background turns to black
+		activeDefenders[0].children[0].style.background='black';
 	}
+
+	
 });
 
 
-// ------------2---------------
 
-// Click on an enemy to attack, it moves to the defender section
-// Its background turns to black
