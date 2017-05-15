@@ -23,12 +23,24 @@ The amount they attack for gets subtracted from their hps
 
 -----------4-----------
 
-If your hps turn to 0 you lose, restart game button appears. Press restart button to restart
+Show on document how many hps you attacked for and how many hps you were attacked for 
+If your hps turn to 0 you lose
+Show on document, you have lost. 
+restart game button appears. 
+Press restart button to restart
+Can no longer press attack button
 If defenders hps turn to 0, defender dissapears
+Show on document 'you have defeated "defender", you can choose to fight another enemy'
+If you press attack button, nothing happens, it shows on document there is no enemy here 
 Go back to step 2
+If all the enemies are defeated show on document 'You won! Game over'
+Attack button does nothing 
+Can press restart button 
 
 */
 
+$(document).ready(function() {
+	
 //global variables
 
 var clickCounter = 1;
@@ -41,11 +53,26 @@ var activeChars = $("#activeChars");
 var activeDefenders = $("#activeDefenders");
 var enemies = $("#enemiesToAttack");
 var attack = $("#attack");
+var pointsLost = $("#pointsLost");
+var pointsGiven = $("#pointsGiven");
 
 //settings hps and attack points
+var darth = $("#darthHps");
+var boba = $("#bobaHps");
+var kenobi = $("#kenobiHps");
+var luke = $("#lukeHps");
 
-$(".charHps").attr("data-hps", 120);
-characters.attr("data-attackPts", 30);
+//hps
+darth.attr("data-hps", 180);
+boba.attr("data-hps", 150);
+kenobi.attr("data-hps", 120);
+luke.attr("data-hps", 100);
+
+//attack pts
+darth.attr("data-attackPts", 25);
+boba.attr("data-attackPts", 20);
+kenobi.attr("data-attackPts", 10);
+luke.attr("data-attackPts", 5);
 
 // -------------1----------------
 
@@ -80,12 +107,16 @@ attack.on('click', function() {
 	var defenderHps = parseInt(defenderHpsText.attr("data-hps"));
 	var chosenCharHps = parseInt(chosenCharsText.attr("data-hps"));
 	//defining variable for amount defender attacks for
-	var defendersAttack = parseInt(characters.attr('data-attackPts'));
+	var defendersAttack = parseInt(chosenCharsText.attr('data-attackPts'));
+	//defining variable for amount chosen character attacks for
+	var attackAmt =  8 * clickCounter;
+	//defining variables for chosen character and active defender names
+	var defenderName =  activeDefenders.find('.charName')[0].innerText;
 
 	//if there is an enemy in the defender section 
 	if(activeDefenders[0].children.length > 0){
 		// attack the defender for a certain amount that gets increased each time you attack
-		defenderHps -= 8 * clickCounter;
+		defenderHps -= attackAmt;
 		// defender attacks you for a fixed amount each time 
 		chosenCharHps -= defendersAttack;
 		//update hps in dom and data value of hps 
@@ -96,7 +127,11 @@ attack.on('click', function() {
 		//update hps in dom and data vlue of hps
 		defenderHpsText.text(defenderHps);
 		defenderHpsText.attr("data-hps", defenderHps);
+		//show how much you attacked for in document
+		pointsGiven.text('You attacked ' + defenderName + ' for ' + attackAmt + ' damage.');
+		//show how much you were attacked for in document
+		pointsLost.text(defenderName + ' attacked you back for ' + defendersAttack + ' damage.');
 	}
 });
 
-
+});
