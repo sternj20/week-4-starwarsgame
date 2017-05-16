@@ -90,7 +90,7 @@ characters.on('click', function() {
 		}
 		//change variable to true so this code won't get run with additional clicks
 		isCharChosen = 'true';
-	} else if ($.contains(enemies[0], this) && activeDefenders[0].children.length < 1){
+	} else if (activeDefenders[0].children.length < 1){
 		// Click on an enemy to attack, it moves to the defender section
 		activeDefenders.append(this);
 		// Its background turns to black
@@ -127,11 +127,40 @@ attack.on('click', function() {
 		//update hps in dom and data vlue of hps
 		defenderHpsText.text(defenderHps);
 		defenderHpsText.attr("data-hps", defenderHps);
+			// If your hps is less than 0 
+			if(chosenCharHps < 0 ){
+				// Show on document, you have lost. 
+				pointsGiven.text('You have been defeated, game over.');
+				pointsLost.text('');
+			// If defenders hps turn to 0
+			} else if (defenderHps < 0){
+				$("#activeDefenders").empty();
+				pointsGiven.text('You have defeated ' + defenderName + ' you can choose to fight another enemy.');
+			} else {
 		//show how much you attacked for in document
 		pointsGiven.text('You attacked ' + defenderName + ' for ' + attackAmt + ' damage.');
 		//show how much you were attacked for in document
 		pointsLost.text(defenderName + ' attacked you back for ' + defendersAttack + ' damage.');
-	}
-});
+			}
+		}
+	});
+
+// -----------4-----------
+
+// Show on document how many hps you attacked for and how many hps you were attacked for 
+// If your hps turn to 0 you lose
+// Show on document, you have lost. 
+// restart game button appears. 
+// Press restart button to restart
+// Can no longer press attack button
+// If defenders hps turn to 0, defender dissapears
+// Show on document 'you have defeated "defender", you can choose to fight another enemy'
+// If you press attack button, nothing happens, it shows on document there is no enemy here 
+// Go back to step 2
+// If all the enemies are defeated show on document 'You won! Game over'
+// Attack button does nothing 
+// Can press restart button 
+
+// */
 
 });
