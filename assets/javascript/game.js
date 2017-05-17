@@ -3,30 +3,30 @@ $(document).ready(function() {
 
 
 //variables
-
 var charChosen;
 var chars = [
-
 {name: 'Boba Fett',
 hps:150,
+attack:20,
 src: 'assets/images/bobafett.png'},
 
 {name: 'Darth Maul',
 hps:180,
+attack:25,
 src: 'assets/images/darthmaul.jpeg'},
 
 {name: 'Obi-Wan Kenbobi',
 hps:120,
+attack:10,
 src: 'assets/images/kenobi.png'},
 
 {name: 'Luke Skywaker',
 hps: 100,
+attack:5,
 src: 'assets/images/skywalker.jpg'}
-
 ];
 
 //dom variables
-
 var chooseChars = $(".chooseChars");
 var chosenChar = $(".chosenChar");
 var enemies = $("#enemies");
@@ -36,11 +36,9 @@ var defender = $(".defender");
 //character container
 var characters = $(".container");
 
-
 //functions
-
 //initialize game
-function reset () {
+var reset = function reset () {
 	charChosen = false;
 	//iterating through the array of different character objects
 	for (var i = 0; i < chars.length; i++){
@@ -58,6 +56,7 @@ function reset () {
 		var charImg = $("<img>");
 		charImg.addClass("characterImgs");
 		charImg.attr("src", chars[i].src);
+		charImg.attr("data-attackPts", chars[i].attack);
 		//adding the img to character div
 		charDiv.append(charImg);
 		//div for hps of character
@@ -67,16 +66,18 @@ function reset () {
 		//adding hps to character div
 		charDiv.append(charHps);
 	}
-}
+};
+
+
 
 //event listener for character select stage
-
 $(document).on('click', '.characters', function(event) {
 
 	if(!charChosen){
+		chosenChar.append(this);
 		$(this).removeClass('characters').addClass('chosenChar');
 	//move selected character to selected character section
-	chosenChar.append(this);
+	
 	charChosen = true;
 	//move remaining characters to enemies to fight section
 	enemiesAttack.append($(".characters"));
@@ -84,12 +85,18 @@ $(document).on('click', '.characters', function(event) {
 });
 
 //event listener for attack stage
-
 $(".enemiesAttack").on('click', '.characters', function(event) {
 	if(defender[0].children.length === 0){
 		$(this).removeClass('characters').addClass('activeDefender');
 		defender.append(this);
 	}
+});
+
+$(".fightSection").on('click', '#attack', function(event) {
+		var charHps = parseInt($(".activeDefender").find(".charHps")[0].innerText);
+		var charAttackPts = parseInt($(".activeDefender").find(".characterImgs").attr("data-attackPts"))
+		console.log(charHps)
+		console.log (charAttackPts)
 	
 });
 
@@ -99,6 +106,7 @@ reset();
 
 });
 /* 
+
 
 -------------1----------------
 

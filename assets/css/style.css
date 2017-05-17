@@ -45,10 +45,14 @@
 
 /*chosen character section section*/
 
-#chosenChar{
+#chosenChar, #enemiesHeader, {
 	clear:both;
 }
 
+.chosenChar{
+	position: relative;
+	float:left;
+}
 .chosen{
 	height:150px;
 	color:gray;
@@ -56,6 +60,9 @@
 
 /* enemies section */
 
+#enemiesHeader{
+	clear:both;
+}
 .enemiesAttack img{
 
 	background: red;
@@ -68,8 +75,19 @@
 	clear:both;
 }
 
+/* defender section */
+
 .fightSection{
 	clear:both;
+}
+.defenderHead{
+	clear:both;
+}
+
+.activeDefender{
+	position: relative;
+	float:left;
+
 }
 
 .score{
