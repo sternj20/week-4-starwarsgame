@@ -1,3 +1,72 @@
+// --------------------------------testing------------------------------
+
+
+//variables
+var chars = [
+
+{name: 'Boba Fett',
+hps:150,
+src: 'assets/images/bobafett.png'},
+
+{name: 'Darth Maul',
+hps:180,
+src: 'assets/images/darthmaul.jpeg'},
+
+{name: 'Obi-Wan Kenbobi',
+hps:120,
+src: 'assets/images/kenobi.png'},
+
+{name: 'Luke Skywaker',
+hps: 100,
+src: 'assets/images/skywalker.jpg'}
+
+];
+
+
+//dom variables
+
+//character container
+var characters = $(".characters");
+
+//
+
+//functions
+
+//initialize game
+function reset () {
+	//iterating through the array of different character objects
+	for (var i = 0; i < chars.length; i++){
+		//creating a div to each character in
+		var charDiv = $("<div>");
+		charDiv.addClass("characters");
+		characters.append(charDiv);
+		
+		///div for the name of character
+		var charName = $("<div>");
+		charName.addClass("charName");
+		charName.text(chars[i].name);
+		//adding name to character div
+		charDiv.append(charName);
+		//div for the img of the character
+		var charImg = $("<img>");
+		charImg.addClass("characterImgs");
+		charImg.attr("src", chars[i].src);
+		//adding the img to character div
+		charDiv.append(charImg);
+		//div for hps of character
+		var charHps = $("<div>");
+		charHps.addClass("charHps");
+		charHps.text(chars[i].hps);
+		//adding hps to character div
+		charDiv.append(charHps);
+	}
+}
+
+
+//function calls
+
+reset();
+
 /* 
 
 -------------1----------------
@@ -37,16 +106,16 @@ If all the enemies are defeated show on document 'You won! Game over'
 Attack button does nothing 
 Can press restart button 
 
-*/
-
 
 
 $(document).ready(function() {
-	
+});
+
+
 //global variables
 
 var clickCounter = 1;
-var isCharChosen = false;
+var isCharChosen = 'false';
 
 //dom variables
 
@@ -57,7 +126,6 @@ var enemies = $("#enemiesToAttack");
 var attack = $("#attack");
 var pointsLost = $("#pointsLost");
 var pointsGiven = $("#pointsGiven");
-var restart = $(".restart");
 
 //settings hps and attack points
 var darth = $("#darthHps");
@@ -92,7 +160,7 @@ characters.on('click', function() {
 			enemies[0].children[i].style.background='red';
 		}
 		//change variable to true so this code won't get run with additional clicks
-		isCharChosen = true;
+		isCharChosen = 'true';
 	} else if (activeDefenders[0].children.length < 1){
 		// Click on an enemy to attack, it moves to the defender section
 		activeDefenders.append(this);
@@ -117,7 +185,7 @@ attack.on('click', function() {
 	var defenderName =  activeDefenders.find('.charName')[0].innerText;
 
 	//if there is an enemy in the defender section 
-	if(activeDefenders[0].children.length > 0 && chosenCharHps > 0){
+	if(activeDefenders[0].children.length > 0){
 		// attack the defender for a certain amount that gets increased each time you attack
 		defenderHps -= attackAmt;
 		// defender attacks you for a fixed amount each time 
@@ -135,28 +203,18 @@ attack.on('click', function() {
 				// Show on document, you have lost. 
 				pointsGiven.text('You have been defeated, game over.');
 				pointsLost.text('');
-				// restart game button appears. 
-				var restartBtn = $("<button>");
-				restartBtn.addClass('restart');
-				restartBtn.text('Restart');
-				$(".fightSection").append(restartBtn);
 			// If defenders hps turn to 0
-		} else if (defenderHps < 0){
-				$("#activeDefenders").empty();///???? why can i not use the variable activedefenders here?????
-				pointsGiven.text('You have defeated ' + defenderName + ', you can choose to fight another enemy.');
+			} else if (defenderHps < 0){
+				$("#activeDefenders").empty();
+				pointsGiven.text('You have defeated ' + defenderName + ' you can choose to fight another enemy.');
 			} else {
 		//show how much you attacked for in document
 		pointsGiven.text('You attacked ' + defenderName + ' for ' + attackAmt + ' damage.');
 		//show how much you were attacked for in document
 		pointsLost.text(defenderName + ' attacked you back for ' + defendersAttack + ' damage.');
-	}
-}
-// Press restart button to restart
-$(".restart").on('click', function(){ ///// ???? why can i not use the variable restart here?
-	
-});
-
-});
+			}
+		}
+	});
 
 // -----------4-----------
 
@@ -174,6 +232,8 @@ $(".restart").on('click', function(){ ///// ???? why can i not use the variable 
 // Attack button does nothing 
 // Can press restart button 
 
-// */
 
-});
+
+
+
+*/
