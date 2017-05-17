@@ -39,12 +39,14 @@ Can press restart button
 
 */
 
+
+
 $(document).ready(function() {
 	
 //global variables
 
 var clickCounter = 1;
-var isCharChosen = 'false';
+var isCharChosen = false;
 
 //dom variables
 
@@ -55,6 +57,7 @@ var enemies = $("#enemiesToAttack");
 var attack = $("#attack");
 var pointsLost = $("#pointsLost");
 var pointsGiven = $("#pointsGiven");
+var restart = $(".restart");
 
 //settings hps and attack points
 var darth = $("#darthHps");
@@ -89,7 +92,7 @@ characters.on('click', function() {
 			enemies[0].children[i].style.background='red';
 		}
 		//change variable to true so this code won't get run with additional clicks
-		isCharChosen = 'true';
+		isCharChosen = true;
 	} else if (activeDefenders[0].children.length < 1){
 		// Click on an enemy to attack, it moves to the defender section
 		activeDefenders.append(this);
@@ -114,7 +117,7 @@ attack.on('click', function() {
 	var defenderName =  activeDefenders.find('.charName')[0].innerText;
 
 	//if there is an enemy in the defender section 
-	if(activeDefenders[0].children.length > 0){
+	if(activeDefenders[0].children.length > 0 && chosenCharHps > 0){
 		// attack the defender for a certain amount that gets increased each time you attack
 		defenderHps -= attackAmt;
 		// defender attacks you for a fixed amount each time 
@@ -132,18 +135,28 @@ attack.on('click', function() {
 				// Show on document, you have lost. 
 				pointsGiven.text('You have been defeated, game over.');
 				pointsLost.text('');
+				// restart game button appears. 
+				var restartBtn = $("<button>");
+				restartBtn.addClass('restart');
+				restartBtn.text('Restart');
+				$(".fightSection").append(restartBtn);
 			// If defenders hps turn to 0
-			} else if (defenderHps < 0){
-				$("#activeDefenders").empty();
-				pointsGiven.text('You have defeated ' + defenderName + ' you can choose to fight another enemy.');
+		} else if (defenderHps < 0){
+				$("#activeDefenders").empty();///???? why can i not use the variable activedefenders here?????
+				pointsGiven.text('You have defeated ' + defenderName + ', you can choose to fight another enemy.');
 			} else {
 		//show how much you attacked for in document
 		pointsGiven.text('You attacked ' + defenderName + ' for ' + attackAmt + ' damage.');
 		//show how much you were attacked for in document
 		pointsLost.text(defenderName + ' attacked you back for ' + defendersAttack + ' damage.');
-			}
-		}
-	});
+	}
+}
+// Press restart button to restart
+$(".restart").on('click', function(){ ///// ???? why can i not use the variable restart here?
+	
+});
+
+});
 
 // -----------4-----------
 
