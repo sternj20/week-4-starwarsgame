@@ -10,44 +10,49 @@
 <body>
 
 <!--  what i need to do
-container to store characters in
-for loop to iterate through my characters
+event listener 
 
-	each iteration
-	create a unique image div and img for each chracter
-	inside of div put my characters name as a text input
-	inside of div put my characters hp as a text input
-	append div to container 
+ADDING AND REMOVING CLASSES 
+
+EVENT LISTENER ON FOR THE FIRST ONCLICK
+	CHA
 
 
 -->
 
-<div class = "container characters">
+<!-- Characters to choose -->
 
-</div>
+	<div class = "chooseChars container">
 
-<div class = "container" id="chosenChar">
+	</div>
+
+
+<!-- Your chosen character -->
+
+<div class = "container chosenChar" id="chosenChar">
 	Your character
-	<div class = "active" id="activeChars">
-		
-	</div>
+	
 </div>
 
-<div class = "container" id = "enemies">
-	Enemies available to attack
-	<div id="enemiesToAttack">
-		
-	</div>
+<!-- Enemies in attack stage -->
+<header>
+Enemies available to attack
+</header>
+<div class = "container enemiesAttack" id = "enemies">
+	
+
 </div>
 
+
+<!-- Fight Section -->
 <div class="fightSection container">
 	Fight Section<br>
 	<button id = "attack">Attack</button>
-	<div id="defender">
+	<!-- Enemies in defense stage -->
+	<div class="defender">
 		Defender
-		<div class = "active" id="activeDefenders">
-		</div>
 	</div>
+	<!-- Score -->
 	<div class = "score">
 		<div id = "pointsGiven">
 		</div>

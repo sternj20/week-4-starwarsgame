@@ -37,17 +37,29 @@
 	text-align:center;
 }
 
-/*active section*/
+
+/*choose your character*/
+
+
+
+
+/*chosen character section section*/
 
 #chosenChar{
 	clear:both;
 }
 
-.active{
+.chosen{
 	height:150px;
 	color:gray;
 }
 
+/* enemies section */
+
+.enemiesAttack img{
+
+	background: red;
+}
 #enemiesToAttack{
 	height:150px;
 }

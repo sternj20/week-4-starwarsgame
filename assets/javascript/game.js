@@ -1,7 +1,10 @@
 // --------------------------------testing------------------------------
+$(document).ready(function() {
 
 
 //variables
+
+var charChosen;
 var chars = [
 
 {name: 'Boba Fett',
@@ -22,25 +25,29 @@ src: 'assets/images/skywalker.jpg'}
 
 ];
 
-
 //dom variables
 
-//character container
-var characters = $(".characters");
+var chooseChars = $(".chooseChars");
+var chosenChar = $(".chosenChar");
+var enemies = $("#enemies");
+var enemiesAttack = $(".enemiesAttack");
+var defender = $(".defender");
 
-//
+//character container
+var characters = $(".container");
+
 
 //functions
 
 //initialize game
 function reset () {
+	charChosen = false;
 	//iterating through the array of different character objects
 	for (var i = 0; i < chars.length; i++){
-		//creating a div to each character in
+		//creating a div for each character 
 		var charDiv = $("<div>");
 		charDiv.addClass("characters");
-		characters.append(charDiv);
-		
+		chooseChars.append(charDiv);
 		///div for the name of character
 		var charName = $("<div>");
 		charName.addClass("charName");
@@ -62,11 +69,35 @@ function reset () {
 	}
 }
 
+//event listener for character select stage
+
+$(document).on('click', '.characters', function(event) {
+
+	if(!charChosen){
+		$(this).removeClass('characters').addClass('chosenChar');
+	//move selected character to selected character section
+	chosenChar.append(this);
+	charChosen = true;
+	//move remaining characters to enemies to fight section
+	enemiesAttack.append($(".characters"));
+}
+});
+
+//event listener for attack stage
+
+$(".enemiesAttack").on('click', '.characters', function(event) {
+	if(defender[0].children.length === 0){
+		$(this).removeClass('characters').addClass('activeDefender');
+		defender.append(this);
+	}
+	
+});
 
 //function calls
 
 reset();
 
+});
 /* 
 
 -------------1----------------
