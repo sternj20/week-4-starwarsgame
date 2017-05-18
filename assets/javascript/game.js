@@ -11,12 +11,12 @@ var counter = 1;
 var chars = [
 {name: 'Boba Fett',
 hps:150,
-attack:20,
+attack:5,
 src: 'assets/images/bobafett.png'},
 
 {name: 'Darth Maul',
 hps:180,
-attack:25,
+attack:20,
 src: 'assets/images/darthmaul.jpeg'},
 
 {name: 'Obi-Wan Kenbobi',
@@ -43,6 +43,7 @@ var characters = $(".container");
 //functions
 //initialize game
 var reset = function reset () {
+	$(".restart").hide();
 	$("#pointsGiven").text('');
 	charChosen = false;
 	counter = 1;
@@ -99,7 +100,7 @@ $(".enemiesAttack").on('click', '.characters', function(event) {
 			newDefender.append(this);
 			$(".fightSection").append(newDefender);
 		}	
-});
+	});
 
 //event listener for fight stage
 $(".fightSection").on('click', "#attack", function(event) {
@@ -112,32 +113,36 @@ $(".fightSection").on('click', "#attack", function(event) {
 	//divs for the amount of attack pts on our characters
 	var charAttackPts = parseInt($(".activeDefender").find(".characterImgs").attr("data-attackPts"));
 	var chosenCharsAttackPts = parseInt($(".chosenChar").find(".characterImgs").attr("data-attackPts")*counter);
-	//updating text in dom to show points given
-	charHpsDiv.innerText -= chosenCharsAttackPts;
-	//updating text in dom to show points lost
-	chosenCharHpsDiv.innerText -= charAttackPts;
-	//increase counter
-	counter++;
+	if (chosenCharHpsDiv.innerText > 0){
 
-		// If your hps is less than 0 
-		if(chosenCharHpsDiv.innerText < 0 ){
-			// Show on document, you have lost. 
-			$("#pointsGiven").text('You have been defeated by ' + defenderName + ' , game over.');
-			$("#pointsLost").text('');
-			// If defenders hps turn to 0
-		} else if ( charHpsDiv.innerText < 0){
-			$(".activeDefender").remove();
-			$("#pointsGiven").text('You have defeated ' + defenderName + ' you can choose to fight another enemy.');
-			$("#pointsLost").text('');
-		} else {
-			$("#pointsGiven").text('You attacked ' + defenderName + ' for ' + chosenCharsAttackPts);
-			$("#pointsLost").text(defenderName + ' attacked you for ' + charAttackPts);
-		}
-	});
+		//updating text in dom to show points given
+		charHpsDiv.innerText -= chosenCharsAttackPts;
+		//updating text in dom to show points lost
+		chosenCharHpsDiv.innerText -= charAttackPts;
+		//increase counter
+		counter++;
+	}
+			// If your hps is less than 0 
+			if(chosenCharHpsDiv.innerText <= 0 ){
+				// Show on document, you have lost. 
+				$("#pointsGiven").text('You have been defeated by ' + defenderName + ' , game over.');
+				$("#pointsLost").text('');
+				$(".restart").show();
+				// If defenders hps turn to 0
+			} else if ( charHpsDiv.innerText < 0){
+				$(".activeDefender").remove();
+				$("#pointsGiven").text('You have defeated ' + defenderName + ' you can choose to fight another enemy.');
+				$("#pointsLost").text('');
+			} else {
+				$("#pointsGiven").text('You attacked ' + defenderName + ' for ' + chosenCharsAttackPts);
+				$("#pointsLost").text(defenderName + ' attacked you for ' + charAttackPts);
+			}
+			
+		});
 
 $(".restart").on("click", $(".restartBtn"), function(){
 	characters.empty();
-	$(".activeDefender").empty();
+	$(".activeDefender").remove();
 	reset();
 });
 
@@ -146,4 +151,3 @@ $(".restart").on("click", $(".restartBtn"), function(){
 reset();
 
 });
-
