@@ -77,7 +77,7 @@
 
 /* defender section */
 
-.fightSection{
+.fightSection, .defender, .score, .restart #attack{
 	clear:both;
 }
 .defenderHead{
@@ -85,6 +85,8 @@
 }
 
 .activeDefender{
+	color:white;
+	background:black;
 	position: relative;
 	float:left;
 
