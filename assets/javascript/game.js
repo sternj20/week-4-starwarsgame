@@ -4,6 +4,10 @@ $(document).ready(function() {
 
 //variables
 var charChosen;
+//counter to increase the attack power by 8 for each attack chosen char has
+var counter = 1;
+
+//variable of characters stored as an array of objects
 var chars = [
 {name: 'Boba Fett',
 hps:150,
@@ -22,7 +26,7 @@ src: 'assets/images/kenobi.png'},
 
 {name: 'Luke Skywaker',
 hps: 100,
-attack:5,
+attack:15,
 src: 'assets/images/skywalker.jpg'}
 ];
 
@@ -68,36 +72,48 @@ var reset = function reset () {
 	}
 };
 
-
-
 //event listener for character select stage
 $(document).on('click', '.characters', function(event) {
 
+	//if there is not a character selected yet
 	if(!charChosen){
+		//move selected character to selected character section
 		chosenChar.append(this);
 		$(this).removeClass('characters').addClass('chosenChar');
-	//move selected character to selected character section
-	
-	charChosen = true;
-	//move remaining characters to enemies to fight section
-	enemiesAttack.append($(".characters"));
-}
+		//turning boolean to true so this code only gets run once
+		charChosen = true;
+		//move remaining characters to enemies to fight section
+		enemiesAttack.append($(".characters"));
+	}
 });
 
 //event listener for attack stage
 $(".enemiesAttack").on('click', '.characters', function(event) {
+	//if there are no characters in defense stage
 	if(defender[0].children.length === 0){
+		//add selected character to defense stage
 		$(this).removeClass('characters').addClass('activeDefender');
 		defender.append(this);
 	}
 });
 
+//event listener for fight stage
 $(".fightSection").on('click', '#attack', function(event) {
-		var charHps = parseInt($(".activeDefender").find(".charHps")[0].innerText);
-		var charAttackPts = parseInt($(".activeDefender").find(".characterImgs").attr("data-attackPts"))
-		console.log(charHps)
-		console.log (charAttackPts)
-	
+	//selecting the div where our hps are stored on our characters
+	var charHpsDiv = $(".activeDefender").find(".charHps")[0];
+	var chosenCharHpsDiv = $(".chosenChar").find(".charHps")[0];
+	//divs for the amount of attack pts on our characters
+	var charAttackPts = parseInt($(".activeDefender").find(".characterImgs").attr("data-attackPts"));
+	var chosenCharsAttackPts = (parseInt($(".chosenChar").find(".characterImgs").attr("data-attackPts"))*counter);
+	//updating text in dom to show points given
+	charHpsDiv.innerText -= chosenCharsAttackPts;
+	//updating text in dom to show points lost
+	chosenCharHpsDiv.innerText -= charAttackPts;
+	//increase counter
+	counter++;
+	$("#pointsGiven").text('You attacked for ' + chosenCharsAttackPts);
+	$("#pointsLost").text('You were attacked for ' + charAttackPts);
+
 });
 
 //function calls
