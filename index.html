@@ -4,6 +4,8 @@
 	<meta charset="UTF-8">
 	<title>Star Wars Rpg</title>
 	<script src="https://code.jquery.com/jquery-3.1.1.js"></script>
+	<link href="https://fonts.googleapis.com/css?family=Bungee" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Space+Mono" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="assets/css/reset.css">
 	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
 </head>
@@ -20,46 +22,45 @@ EVENT LISTENER ON FOR THE FIRST ONCLICK
 
 -->
 
-<!-- Characters to choose -->
+<div class = "left">
+	<!-- Your chosen character -->
 
-<div class = "chooseChars container">
+	<div class = "container chosenChar" id="chosenChar">
+		<header class = "header">
+			<h1>You fight as</h1>
+		</header>
+		
+	</div>
 
-</div>
+	<!-- Characters to choose -->
+
+	<div class = "chooseChars container">
+
+	</div>
 
 
-<!-- Your chosen character -->
 
-<div class = "container chosenChar" id="chosenChar">
-	<header class = "header">
-		Your character
+	<!-- Enemies in attack stage -->
+	<header id = "enemiesHeader">
+		<h1>VS</h1>
 	</header>
-	
-</div>
-
-<!-- Enemies in attack stage -->
-<header id = "enemiesHeader">
-	Enemies available to attack
-</header>
-<div class = "container enemiesAttack" id = "enemies">
-	
-
-</div>
-
-
-<!-- Fight Section -->
-<div class="fightSection">
-	Fight Section<br>
-	<div class = "attack">
-	<button class = "attack" id = "attack">Attack</button>
+	<div class = "container enemiesAttack" id = "enemies">
 	</div>
+
+	<!-- Fight Section -->
+	<div class="fightSection">
+
+	</div>
+
 	<!-- Enemies in defense stage -->
-	<div class="defenderHead">
-		Defender
+	<div class = "attackButton">
+			<header><h2>attack</h2>
+			<img id = "lightsaber" src = "assets/images/lightsaber.png">
+			</header>
 	</div>
 </div>
 
-	<div class = "defender">
-	</div>
+<div class = "right">
 	<!-- Score -->
 	<div class = "score">
 		<div id = "pointsGiven">
@@ -69,12 +70,13 @@ EVENT LISTENER ON FOR THE FIRST ONCLICK
 	</div>
 
 	<div class = "restart">
-	<button class = "restartBtn">restart</button>
-	<div>
-</div>
+		<button class = "restartBtn">restart</button>
+		<div>
+		</div>
+	</div>
 
 
-<script type="text/javascript" src = "assets/javascript/game.js"></script>
+	<script type="text/javascript" src = "assets/javascript/game.js"></script>
 
 
 

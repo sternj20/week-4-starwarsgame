@@ -1,8 +1,7 @@
 // --------------------------------testing------------------------------
 $(document).ready(function() {
-
-
 //variables
+
 var charChosen;
 //counter to increase the attack power by 8 for each attack chosen char has
 var counter = 1;
@@ -19,7 +18,7 @@ hps:180,
 attack:20,
 src: 'assets/images/darthmaul.jpeg'},
 
-{name: 'Obi-Wan Kenbobi',
+{name: 'Obi-Wan Kenobi',
 hps:120,
 attack:10,
 src: 'assets/images/kenobi.png'},
@@ -41,9 +40,12 @@ var defender = $(".defender");
 var characters = $(".container");
 
 //functions
+
 //initialize game
 var reset = function reset () {
+	$(".attackButton").hide();
 	$(".restart").hide();
+	$(".fightSection").hide();
 	$("#pointsGiven").text('');
 	charChosen = false;
 	counter = 1;
@@ -77,34 +79,38 @@ var reset = function reset () {
 
 //event listener for character select stage
 $(document).on('click', '.characters', function(event) {
-
+	//if a character has not been chosen yet
 	if(!charChosen){
 		//move selected character to selected character section
 		chosenChar.append(this);
 		$(this).removeClass('characters').addClass('chosenChar');
-		//turning boolean to true so this code only gets run once
+		//changing boolean to true so this code only gets run once
 		charChosen = true;
 		//move remaining characters to enemies to fight section
 		enemiesAttack.append($(".characters"));
+		$(".enemiesAttack").show();
 	}
 });
 
 //event listener for attack stage
 $(".enemiesAttack").on('click', '.characters', function(event) {
 	$("#pointsGiven").text('');
+	$(".fightSection").show();
 	//if there are no characters in defense stage
-		//add selected character to defense stage
-		if ($(".activeDefender").length === 0){
+	if ($(".activeDefender").length === 0){
+			//create new div for defender
 			var newDefender = $("<div>");
 			$(this).removeClass('characters').addClass('activeDefender');
+			//add selected character to defense stage
 			newDefender.append(this);
 			$(".fightSection").append(newDefender);
+			$(".enemiesAttack").hide();
+			$(".attackButton").show();
 		}	
 	});
 
 //event listener for fight stage
-$(".fightSection").on('click', "#attack", function(event) {
-
+$(document).on('click', "#lightsaber", function(event) {
 	//variable for active defenders name
 	var defenderName = $(".activeDefender").find(".charName")[0].innerText;
 	//selecting the div where our hps are stored on our characters
@@ -114,7 +120,6 @@ $(".fightSection").on('click', "#attack", function(event) {
 	var charAttackPts = parseInt($(".activeDefender").find(".characterImgs").attr("data-attackPts"));
 	var chosenCharsAttackPts = parseInt($(".chosenChar").find(".characterImgs").attr("data-attackPts")*counter);
 	if (chosenCharHpsDiv.innerText > 0){
-
 		//updating text in dom to show points given
 		charHpsDiv.innerText -= chosenCharsAttackPts;
 		//updating text in dom to show points lost
@@ -133,13 +138,14 @@ $(".fightSection").on('click', "#attack", function(event) {
 				$(".activeDefender").remove();
 				$("#pointsGiven").text('You have defeated ' + defenderName + ' you can choose to fight another enemy.');
 				$("#pointsLost").text('');
+				$(".enemiesAttack").show();
 			} else {
 				$("#pointsGiven").text('You attacked ' + defenderName + ' for ' + chosenCharsAttackPts);
 				$("#pointsLost").text(defenderName + ' attacked you for ' + charAttackPts);
 			}
-			
 		});
 
+//event listener for restart button
 $(".restart").on("click", $(".restartBtn"), function(){
 	characters.empty();
 	$(".activeDefender").remove();
