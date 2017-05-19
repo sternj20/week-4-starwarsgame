@@ -4,81 +4,81 @@
 	<meta charset="UTF-8">
 	<title>Star Wars Rpg</title>
 	<script src="https://code.jquery.com/jquery-3.1.1.js"></script>
+	<link href="https://fonts.googleapis.com/css?family=Bungee" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Space+Mono" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="assets/css/reset.css">
 	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
 </head>
 <body>
 
+<!--  what i need to do
+event listener 
+
+ADDING AND REMOVING CLASSES 
+
+EVENT LISTENER ON FOR THE FIRST ONCLICK
+	CHA
 
 
-	<div class = "characters">
-		<img class = "characterImgs" src = "assets/images/bobafett.png">
-		<div class = "charName">
-			Boba Fett
-		</div>
-		<div class = "charHps" id = "bobaHps">
-			150
-		</div>
-	</div>
-	<div class ="characters">
-		<img class = "characterImgs" src = "assets/images/darthmaul.jpeg">
-		<div class = "charName">
-			Darth Maul
-		</div>
-		<div class = "charHps" id = "darthHps">
-			180
-		</div>
-	</div>
-	<div class ="characters">
-		<img class = "characterImgs" src = "assets/images/kenobi.png">
-		<div class = "charName">
-			Obi-Wan Kenobi
-		</div>
-		<div class = "charHps" id = "kenobiHps">
-			120
-		</div>
-	</div>
-	<div class ="characters">
-		<img class = "characterImgs" src = "assets/images/skywalker.jpg">
-		<div class = "charName">
-			Luke Skywalker
-		</div>
-		<div class = "charHps" id = "lukeHps">
-			100
-		</div>
-	</div>
-</div>
+-->
 
-<div class = "container" id="chosenChar">
-	Your character
-	<div class = "active" id="activeChars">
+<div class = "left">
+	<!-- Your chosen character -->
+
+	<div class = "container chosenChar" id="chosenChar">
+		<header class = "header">
+			<h1>You fight as</h1>
+		</header>
 		
 	</div>
-</div>
 
-<div class = "container" id = "enemies">
-	Enemies available to attack
-	<div id="enemiesToAttack">
-		
+	<!-- Characters to choose -->
+
+	<div class = "chooseChars container">
+
+	</div>
+
+
+
+	<!-- Enemies in attack stage -->
+	<header id = "enemiesHeader">
+		<h1>VS</h1>
+	</header>
+	<div class = "container enemiesAttack" id = "enemies">
+	</div>
+
+	<!-- Fight Section -->
+	<div class="fightSection">
+
+	</div>
+
+	<!-- Enemies in defense stage -->
+	<div class = "attackButton">
+			<header><h2>attack</h2>
+			<img id = "lightsaber" src = "assets/images/lightsaber.png">
+			</header>
 	</div>
 </div>
 
-<div class="fightSection container">
-	Fight Section<br>
-	<button id = "attack">Attack</button>
-	<div id="defender">
-		Defender
-		<div class = "active" id="activeDefenders">
-		</div>
-	</div>
+<div class = "right">
+	<!-- Score -->
 	<div class = "score">
 		<div id = "pointsGiven">
 		</div>
 		<div id = "pointsLost">
 		</div>
 	</div>
-</div>
 
-<script type="text/javascript" src = "assets/javascript/game.js"></script>
+	<div class = "restart">
+		<button class = "restartBtn">restart</button>
+		<div>
+		</div>
+	</div>
+
+
+	<script type="text/javascript" src = "assets/javascript/game.js"></script>
+
+
+
 </body>
 </html>
