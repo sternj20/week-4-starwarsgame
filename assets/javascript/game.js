@@ -130,13 +130,18 @@ $(document).on('click', "#lightsaber", function(event) {
 			// If your hps is less than 0 
 			if(chosenCharHpsDiv.innerText <= 0 ){
 				// Show on document, you have lost. 
-				$("#pointsGiven").text('You have been defeated by ' + defenderName + ' , game over.');
+				$("#pointsGiven").text('You have been defeated by ' + defenderName + ', game over.');
 				$("#pointsLost").text('');
 				$(".restart").show();
 				// If defenders hps turn to 0
-			} else if ( charHpsDiv.innerText < 0){
+			} else if ( charHpsDiv.innerText <= 0){
 				$(".activeDefender").remove();
-				$("#pointsGiven").text('You have defeated ' + defenderName + ' you can choose to fight another enemy.');
+				if ($(".characterImgs").length > 1 ){
+					$("#pointsGiven").text('You have defeated ' + defenderName + ' you can choose to fight another enemy.');
+				} else {
+					$("#pointsGiven").text('You have won!!');
+					$(".restart").show();
+				}
 				$("#pointsLost").text('');
 				$(".enemiesAttack").show();
 			} else {
